@@ -23,6 +23,15 @@ public class LambdaExpressions2 {
                 new Car("Mitsubishi","Gaant","White",45300),
                 new Car("Jeep","Wrangler","Red",33300)
         );
+        
+//        printCarsPriceRange(cars, 19000, 25000);
+//        printCarByColor(cars, "Red");
+
+        System.out.println("Printing cars between price 19000 and 25000");
+        printCars(cars, (c)-> 19000 <= c.getPrice() && c.getPrice() <= 25000);
+        
+        System.out.println("Printing red cars ");
+        printCars(cars, (c)-> c.getColor().equals("Red"));
     }
     
     public static void printCarsPriceRange(List<Car> cars,int low,int high){
@@ -41,4 +50,17 @@ public class LambdaExpressions2 {
         }
     }
     
+    public static void printCars(List<Car> cars,Condition<Car> condition){
+        for(Car c:cars){
+            if(condition.test(c)){
+                c.printCar();
+            }
+        }
+    }
+    
+    
+}
+@FunctionalInterface
+interface Condition<T>{
+    public boolean test(T t);
 }
