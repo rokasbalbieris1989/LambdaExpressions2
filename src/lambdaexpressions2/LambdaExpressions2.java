@@ -3,6 +3,8 @@ package lambdaexpressions2;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
  *
@@ -24,35 +26,41 @@ public class LambdaExpressions2 {
                 new Car("Jeep","Wrangler","Red",33300)
         );
         
-//        printCarsPriceRange(cars, 19000, 25000);
-//        printCarByColor(cars, "Red");
 
         System.out.println("Printing cars between price 19000 and 25000");
+        //        printCarsPriceRange(cars, 19000, 25000);
         printCars(cars, (c)-> 19000 <= c.getPrice() && c.getPrice() <= 25000);
         
+        
         System.out.println("Printing red cars ");
+        //        printCarByColor(cars, "Red");
         printCars(cars, (c)-> c.getColor().equals("Red"));
+        
+        
+        Function<Car,String> priceAndColor = (c)-> " price: "+c.getPrice()+" ,color: "+c.getColor();
+        String stringCar = priceAndColor.apply(cars.get(0));
+        System.out.println(stringCar);
     }
     
-    public static void printCarsPriceRange(List<Car> cars,int low,int high){
-        for(Car c:cars){
-            if(low <= c.getPrice() && c.getPrice() <= high){
-                c.printCar();
-            }
-        }
-    }
+//    public static void printCarsPriceRange(List<Car> cars,int low,int high){
+//        for(Car c:cars){
+//            if(low <= c.getPrice() && c.getPrice() <= high){
+//                c.printCar();
+//            }
+//        }
+//    }
+//    
+//    public static void printCarByColor(List<Car> cars,String color){
+//        for(Car c:cars){
+//            if(c.getColor().equals(color)){
+//                c.printCar();
+//            }
+//        }
+//    }
     
-    public static void printCarByColor(List<Car> cars,String color){
+    public static void printCars(List<Car> cars,Predicate<Car> predicate){
         for(Car c:cars){
-            if(c.getColor().equals(color)){
-                c.printCar();
-            }
-        }
-    }
-    
-    public static void printCars(List<Car> cars,Condition<Car> condition){
-        for(Car c:cars){
-            if(condition.test(c)){
+            if(predicate.test(c)){
                 c.printCar();
             }
         }
@@ -60,7 +68,8 @@ public class LambdaExpressions2 {
     
     
 }
-@FunctionalInterface
-interface Condition<T>{
-    public boolean test(T t);
-}
+//
+//@FunctionalInterface
+//interface Condition<T>{
+//    public boolean test(T t);
+//}
