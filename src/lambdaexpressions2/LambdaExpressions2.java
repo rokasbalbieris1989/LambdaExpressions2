@@ -1,9 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package lambdaexpressions2;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  *
@@ -11,11 +10,35 @@ package lambdaexpressions2;
  */
 public class LambdaExpressions2 {
 
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String[] args) {
-        // TODO code application logic here
+       
+        List<Car> cars = Arrays.asList(
+                new Car("Honda","Accord","Red",22300),
+                new Car("Honda","Civic","Blue",17700),
+                new Car("Toyota","Land Cruiser","White",45300),
+                new Car("Toyota","Corolla","Black",23300),
+                new Car("Toyota","Yaris","Blue",16300),
+                new Car("Nissan","Skyline","White",56300),
+                new Car("Mitsubishi","Gaant","White",45300),
+                new Car("Jeep","Wrangler","Red",33300)
+        );
+    }
+    
+    public static void printCarsPriceRange(List<Car> cars,int low,int high){
+        for(Car c:cars){
+            if(low <= c.getPrice() && c.getPrice() <= high){
+                c.printCar();
+            }
+        }
+    }
+    
+    public static void printCarByColor(List<Car> cars,String color){
+        for(Car c:cars){
+            if(c.getColor().equals(color)){
+                c.printCar();
+            }
+        }
     }
     
 }
